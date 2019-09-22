@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ tab_title }}</title>
+  </head>
+  <body>
+  <table>
+  	{% for row in pair_list %}
+  		<tr>
+  			{% for cell in row %}
+  				<td>{{ cell }}</td>
+  			{% endfor %}
+  		</tr>
+  	{% endfor %}
+  </table>
+  </body>
+</html>
