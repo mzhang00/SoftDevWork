@@ -10,9 +10,11 @@ import random
 # CSV Script ----------------------------------------------------------
 #open the csv file
 file=open("occupations.csv","r")
+file2 = open("links.csv", "r")
 
 #read the file and split on new lines to get each line of the csv table as an element in the list
 job=file.read().split("\n")
+links = file2.read().split("\n")
 
 #function to iterate through the list and split each line of the csv table on the right-most comma, separating the occupation and the percentage
 def splitCategory(l):
@@ -23,6 +25,7 @@ def splitCategory(l):
         #split at the last comma of each item (becomes 2d array with occupation and percentage)
     return l
 job=splitCategory(job)
+links=splitCategory(links)
 
 #function for taking out the quotation marks in the occupation
 def takeOutQuotes(l):
@@ -34,18 +37,38 @@ def takeOutQuotes(l):
             #strip the quotes
     return l
 job=takeOutQuotes(job)
+links=takeOutQuotes(links)
 
 #take out the first item(category titles) and last two items (total percentage and an extra empty list)
-jobtable = job[:len(job) - 1]
+jobtable = job[1:len(job) - 2]
 
-listofjobs = [None] * len(jobtable);
-listofpercentages = [None] * len(jobtable);
+#make three new lists: one with only the jobs, one with only the percentages, one with only the links
+listofjobs = [None] * len(jobtable)
+listofpercentages = [None] * len(jobtable)
+listoflinks = [None] * len(jobtable)
 
 for i in range(0, len(jobtable)):
     listofjobs[i] = jobtable[i][0]
     listofpercentages[i] = jobtable[i][1]
+    listoflinks[i] = links[i][1]
 
 job=job[1:len(job) - 2]
+
+#make a dictionary to store the percentages
+dictofpercentages = dict.fromkeys(listofjobs)
+counter = 0
+
+for key in dictofpercentages.keys():
+    dictofpercentages[key] = listofpercentages[counter]
+    counter = counter + 1
+
+#make a dictionary to store the links
+dictoflinks = dict.fromkeys(listofjobs)
+counter = 0
+
+for key in dictoflinks.keys():
+    dictoflinks[key] = listoflinks[counter]
+    counter = counter + 1
 
 #function to update each percentage to be a sum of all previous percentages
 def rangePercent(l):
@@ -106,7 +129,9 @@ def occ_table():
     return render_template('/occ_template.html',
     	tab_title = "Occupation Table and Generator",
 		random_job = randomPick(job),
-    	pair_list = zip(listofjobs, listofpercentages))
+    	job_list = listofjobs, 
+        percentage_dict = dictofpercentages,
+        links_dict = dictoflinks)
 
 if __name__ == "__main__":
     app.debug = True #When this is false, the website no longer able to update authomatically when you make a change in the code

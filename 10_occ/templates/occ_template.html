@@ -10,13 +10,23 @@
     <b>Random Job: {{ random_job }}</b>
     <br><br>
   <table>
-  	{% for row in pair_list %}
+    <tr>
+      <td><b><font size="5">Job Class</font></b></td>
+      <td><b><font size="5">Percentage</font></b></td>
+      <td><b><font size="5">Link</font></b></td>
+    </tr>
+  	{% for item in job_list %}
   		<tr>
-  			{% for cell in row %}
-  				<td>{{ cell }}</td>
-  			{% endfor %}
-  		</tr>
-  	{% endfor %}
+        <td>{{ item }}</td>
+        <td>{{ percentage_dict[item] }}</td>
+        <td><a href = {{links_dict[item]}}>{{item}}</a></td>
+      </tr>
+    {% endfor %}
+    <tr>
+        <td><b><font size="5">Total</font></b></td>
+        <td><b><font size="5">99.8</font></b></td>
+        <td></td>
+      </tr>
   </table>
   </body>
 </html>
