@@ -1,16 +1,13 @@
-#Jesse "McCree" Chen and Michael Zhang
+#Jesse "McCree" Chen and Michael "Bob" Zhang
 #SoftDev1 pd1
 #K10 -- Jinja Tuning
 #2019-09-21
 
 from flask import Flask, render_template
+
 import random
 
 # CSV Script ----------------------------------------------------------
-filehandle = open('occupations.csv', 'r')
-csv_list = filehandle.readlines()
-list_of_percents = list()
-list_of_jobs = list()
 #open the csv file
 file=open("occupations.csv","r")
 
@@ -39,7 +36,16 @@ def takeOutQuotes(l):
 job=takeOutQuotes(job)
 
 #take out the first item(category titles) and last two items (total percentage and an extra empty list)
-job=job[1:len(job)-2]
+jobtable = job[:len(job) - 1]
+
+listofjobs = [None] * len(jobtable);
+listofpercentages = [None] * len(jobtable);
+
+for i in range(0, len(jobtable)):
+    listofjobs[i] = jobtable[i][0]
+    listofpercentages[i] = jobtable[i][1]
+
+job=job[1:len(job) - 2]
 
 #function to update each percentage to be a sum of all previous percentages
 def rangePercent(l):
@@ -85,29 +91,6 @@ def randomPick(l):
     else:
         #back loop returns the next item
         return l[countb+1][0]
-print (randomPick(job))
-
-
-#Make list of jobs and list of percents
-for pair in csv_list:
-	rev_pair = pair[::-1]
-	rev_percentage = ''
-	rev_job = ''
-	index_of_comma = 0
-	for char in rev_pair:
-		if char != ',':
-			rev_percentage += char
-			index_of_comma += 1
-		elif char == ',':
-			break
-	for char in rev_pair[(index_of_comma + 1):]:
-		rev_job += char
-	list_of_percents.append(rev_percentage[:0:-1])
-	list_of_jobs.append(rev_job[::-1])
-
-
-#Random generation of a job
-
 
 # End of CSV Script ---------------------------------------------------
 
@@ -123,7 +106,7 @@ def occ_table():
     return render_template('/occ_template.html',
     	tab_title = "Occupation Table and Generator",
 		random_job = randomPick(job),
-    	pair_list = zip(list_of_jobs, list_of_percents))
+    	pair_list = zip(listofjobs, listofpercentages))
 
 if __name__ == "__main__":
     app.debug = True #When this is false, the website no longer able to update authomatically when you make a change in the code
