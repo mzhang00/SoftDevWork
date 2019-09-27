@@ -1,0 +1,13 @@
+{% extends "tempheader.html" %}
+
+  {% block bodies %}
+  
+  <form action="/auth">
+    Username:<br>
+    <input type="text" name="username"><br>
+    Shibboleth:<br>
+    <input type="password" name="shibboleth"><br>
+    <input type = "submit" name = "submitbutton">
+  </form>
+  
+  {% endblock %}
