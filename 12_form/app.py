@@ -16,9 +16,9 @@ def authenticate():
     print(app)
     print(request)
     print(request.args)
-    print('hello')
-    session['Username'] = request.args['username']
-    print(session.pop('Username'))
+    #print('hello')
+    #session['Username'] = request.args['username']
+    #print(session.pop('Username'))
     #print(request.cookies.get('username'))
     return render_template('auth.html', user = request.args['username'], requestmethod = request.method)
 
