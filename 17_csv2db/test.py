@@ -14,9 +14,9 @@ c = db.cursor()
 with open('students.csv', newline='') as csvfile:
      reader = csv.DictReader(csvfile)
      for row in reader:
-         print(row['name'], row['age'],row['id'])
+         print(row['name'])
 
-command = ""          # test SQL stmt in sqlite3 shell, save as string
+command = "CREATE TABLE Students (name TEXT, age INTEGER, ID INTEGER); \n insert into name row['name'][1]"          # test SQL stmt in sqlite3 shell, save as string
 c.execute(command)    # run SQL statement
 
 #==========================================================
