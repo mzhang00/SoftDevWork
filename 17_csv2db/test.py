@@ -11,13 +11,16 @@ DB_FILE="test.db"
 db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
 c = db.cursor()
 
-with open('students.csv', newline='') as csvfile:
+command = "CREATE TABLE Students (name TEXT, age INTEGER, id INTEGER);" # test SQL stmt in sqlite3 shell, save as string
+#c.execute(command)    # run SQL statement
+
+with open('students.csv') as csvfile:
      reader = csv.DictReader(csvfile)
      for row in reader:
-         print(row['name'])
-
-command = "CREATE TABLE Students (name TEXT, age INTEGER, ID INTEGER); \n insert into name row['name'][1]"          # test SQL stmt in sqlite3 shell, save as string
-c.execute(command)    # run SQL statement
+         command = "insert into Students (name, age, id) values ('" + row['name'] + "', " + str(row['age']) + ", " + str(row['id']) + ")"
+         #print(command)
+         c.execute(command)    # run SQL statement
+         #print(row['name'], row['age'], row['id'])
 
 #==========================================================
 
