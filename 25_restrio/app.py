@@ -13,7 +13,7 @@ def root():
     )
     response = u.read()
     data = json.loads( response )
-    randomint = random.randint(0,20)
+    randomint = random.randint(0,17)
     return render_template("index.html", pic = data['results'][randomint]['image'], name = data['results'][randomint]['name'])
 
 @app.route("/TylerMFN1")
