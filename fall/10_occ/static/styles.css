@@ -1,0 +1,21 @@
+body {
+    background-color: #2A3254;
+    color: #d1d5de;
+    font-family: "Trebuchet MS", sans-serif;
+}
+h1, h2, h3{
+    color:#DAA520;
+}
+a{
+    color:#d1d5de;
+}
+p {
+    color:#d1d5de;
+}
+td {
+    text-align: center;
+}
+table, td {
+    border: 2px solid #daa520;
+    border-collapse: collapse;
+}

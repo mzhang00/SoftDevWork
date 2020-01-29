@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>{{ tab_title }}</title>
+  </head>
+  <body>
+    <h1>Job Generator and Table</h1>
+    <h2>Capture the Flask: Jesse "McCree" Chen and Michael "Bob" Zhang</h2>
+    <b>Random Job: {{ random_job }}</b>
+    <br><br>
+  <table>
+    <tr>
+      <td><b><font size="5">Job Class</font></b></td>
+      <td><b><font size="5">Percentage</font></b></td>
+      <td><b><font size="5">Link</font></b></td>
+    </tr>
+  	{% for item in job_list %}
+  		<tr>
+        <td>{{ item }}</td>
+        <td>{{ percentage_dict[item] }}</td>
+        <td><a href = {{links_dict[item]}}>{{item}}</a></td>
+      </tr>
+    {% endfor %}
+    <tr>
+        <td><b><font size="5">Total</font></b></td>
+        <td><b><font size="5">99.8</font></b></td>
+        <td></td>
+      </tr>
+  </table>
+  </body>
+</html>
