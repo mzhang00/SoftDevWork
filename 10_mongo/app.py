@@ -11,19 +11,19 @@ client = MongoClient('localhost')
 db = client.RAM
 meteors = db.meteors
 
-if (meteors in db.list_collection_names()):
+if (meteors in db.list_meteorslection_names()):
     f = open("meteorites.json","r")
     rString = f.readlines()
     t = loads(rString)
 
 def filter_mass(mass):
-    return list(col.find({'mass':mass}))
+    return list(meteors.find({'mass':mass}))
 
 def filter_coords(longitude, lat):
-    return list(col.find({'reclong':longitude, 'reclat': lat}))
+    return list(meteors.find({'reclong':longitude, 'reclat': lat}))
 
 def filter_class(recclass):
-    return list(col.find({'recclass':recclass}))
+    return list(meteors.find({'recclass':recclass}))
 
 def filter_year(year):
-    return list(col.find({'year':year}))
+    return list(meteors.find({'year':year}))
